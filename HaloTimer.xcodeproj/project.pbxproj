@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D46C722264B266D00DCED7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C721264B266D00DCED7B /* AppDelegate.swift */; };
 		1D46C724264B266D00DCED7B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C723264B266D00DCED7B /* SceneDelegate.swift */; };
-		1D46C726264B266D00DCED7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C725264B266D00DCED7B /* ViewController.swift */; };
+		1D46C726264B266D00DCED7B /* MapsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C725264B266D00DCED7B /* MapsVC.swift */; };
 		1D46C729264B266D00DCED7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D46C727264B266D00DCED7B /* Main.storyboard */; };
 		1D46C72C264B266D00DCED7B /* HaloTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C72A264B266D00DCED7B /* HaloTimer.xcdatamodeld */; };
 		1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D46C72D264B266F00DCED7B /* Assets.xcassets */; };
@@ -18,13 +18,16 @@
 		1D46C748264B27A900DCED7B /* Weapon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C744264B27A900DCED7B /* Weapon+CoreDataProperties.swift */; };
 		1D46C749264B27A900DCED7B /* Map+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C745264B27A900DCED7B /* Map+CoreDataClass.swift */; };
 		1D46C74A264B27A900DCED7B /* Map+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C746264B27A900DCED7B /* Map+CoreDataProperties.swift */; };
+		1D46C74C264B311D00DCED7B /* HaloFont in Resources */ = {isa = PBXBuildFile; fileRef = 1D46C74B264B311D00DCED7B /* HaloFont */; };
+		1D46C74E264B324500DCED7B /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C74D264B324500DCED7B /* MapCell.swift */; };
+		1D46C751264B355A00DCED7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C750264B355A00DCED7B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D46C71E264B266D00DCED7B /* HaloTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D46C721264B266D00DCED7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D46C723264B266D00DCED7B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1D46C725264B266D00DCED7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1D46C725264B266D00DCED7B /* MapsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsVC.swift; sourceTree = "<group>"; };
 		1D46C728264B266D00DCED7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1D46C72B264B266D00DCED7B /* HaloTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HaloTimer.xcdatamodel; sourceTree = "<group>"; };
 		1D46C72D264B266F00DCED7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +37,9 @@
 		1D46C744264B27A900DCED7B /* Weapon+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weapon+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1D46C745264B27A900DCED7B /* Map+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1D46C746264B27A900DCED7B /* Map+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1D46C74B264B311D00DCED7B /* HaloFont */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HaloFont; sourceTree = SOURCE_ROOT; };
+		1D46C74D264B324500DCED7B /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
+		1D46C750264B355A00DCED7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +76,12 @@
 			children = (
 				1D46C721264B266D00DCED7B /* AppDelegate.swift */,
 				1D46C723264B266D00DCED7B /* SceneDelegate.swift */,
+				1D46C74F264B353C00DCED7B /* Constants */,
 				1D46C739264B268D00DCED7B /* Model */,
 				1D46C73A264B269200DCED7B /* View */,
 				1D46C738264B267F00DCED7B /* Controller */,
 				1D46C727264B266D00DCED7B /* Main.storyboard */,
+				1D46C74B264B311D00DCED7B /* HaloFont */,
 				1D46C72D264B266F00DCED7B /* Assets.xcassets */,
 				1D46C72F264B266F00DCED7B /* LaunchScreen.storyboard */,
 				1D46C732264B266F00DCED7B /* Info.plist */,
@@ -85,7 +93,7 @@
 		1D46C738264B267F00DCED7B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1D46C725264B266D00DCED7B /* ViewController.swift */,
+				1D46C725264B266D00DCED7B /* MapsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -102,8 +110,17 @@
 		1D46C73A264B269200DCED7B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1D46C74D264B324500DCED7B /* MapCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1D46C74F264B353C00DCED7B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1D46C750264B355A00DCED7B /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +183,7 @@
 				1D46C731264B266F00DCED7B /* LaunchScreen.storyboard in Resources */,
 				1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */,
 				1D46C729264B266D00DCED7B /* Main.storyboard in Resources */,
+				1D46C74C264B311D00DCED7B /* HaloFont in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,9 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D46C74A264B27A900DCED7B /* Map+CoreDataProperties.swift in Sources */,
-				1D46C726264B266D00DCED7B /* ViewController.swift in Sources */,
+				1D46C726264B266D00DCED7B /* MapsVC.swift in Sources */,
+				1D46C74E264B324500DCED7B /* MapCell.swift in Sources */,
 				1D46C748264B27A900DCED7B /* Weapon+CoreDataProperties.swift in Sources */,
 				1D46C747264B27A900DCED7B /* Weapon+CoreDataClass.swift in Sources */,
+				1D46C751264B355A00DCED7B /* Constants.swift in Sources */,
 				1D46C722264B266D00DCED7B /* AppDelegate.swift in Sources */,
 				1D46C724264B266D00DCED7B /* SceneDelegate.swift in Sources */,
 				1D46C72C264B266D00DCED7B /* HaloTimer.xcdatamodeld in Sources */,
