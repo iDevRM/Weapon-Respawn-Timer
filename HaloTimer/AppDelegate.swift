@@ -14,7 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        preloadData()
+        preloadMapImageNames()
         return true
     }
 
@@ -31,6 +32,78 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    private func preloadData() {
+        let preloadedDataKey = "pre-loadedData"
+        let userDefualts = UserDefaults.standard
+        
+        if userDefualts.bool(forKey: preloadedDataKey) == false {
+            guard let urlPath = Bundle.main.url(forResource: "Maps", withExtension: "plist") else { return }
+            
+            let backgroundContext = persistentContainer.newBackgroundContext()
+            Constants.context.automaticallyMergesChangesFromParent = true
+            
+            backgroundContext.perform {
+                
+                if let arrayOfMaps = NSArray(contentsOf: urlPath) as? [String] {
+                    
+                    do {
+                        for item in arrayOfMaps {
+                            let newMap = Map(context: backgroundContext)
+                            newMap.mapName = item
+                        }
+                        
+                        try backgroundContext.save()
+                        
+                        userDefualts.set(true, forKey: preloadedDataKey)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+
+    }
+    
+    private func preloadMapImageNames() {
+        let preloadedDataKey = "pre-loadMapImageNames"
+        let userDefualts = UserDefaults.standard
+        
+        if userDefualts.bool(forKey: preloadedDataKey) == false {
+            guard let urlPath = Bundle.main.url(forResource: "MapImageNames", withExtension: "plist") else { return }
+            
+            let backgroundContext = persistentContainer.newBackgroundContext()
+            Constants.context.automaticallyMergesChangesFromParent = true
+            
+            backgroundContext.perform {
+                
+                if let mapImageNames = NSArray(contentsOf: urlPath) as? [String] {
+                    let request: NSFetchRequest<Map> = Map.fetchRequest()
+                    do {
+                        
+                        let maps = try Constants.context.fetch(request)
+                        
+                        for mapName in mapImageNames {
+                            for map in maps {
+                                if mapName == map.mapName {
+                                    map.imageName = mapName
+                                    print(map)
+                                }
+                            }
+                        }
+                        
+                        try backgroundContext.save()
+                        try Constants.context.save()
+                        userDefualts.set(true, forKey: preloadedDataKey)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+
+    }
+
 
     // MARK: - Core Data stack
 

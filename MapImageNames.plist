@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<string>Avalanche</string>
+	<string>Assembly</string>
+	<string>Blackout</string>
+	<string>Citadel</string>
+	<string>Cold Storage</string>
+	<string>Construct</string>
+	<string>Epitaph</string>
+	<string>Foundry</string>
+	<string>Ghost Town</string>
+	<string>Guardian</string>
+	<string>Heretic</string>
+	<string>High Ground</string>
+	<string>Isolation</string>
+	<string>Last Resort</string>
+	<string>Longshore</string>
+	<string>Narrows</string>
+	<string>Orbital</string>
+	<string>Rat&apos;s Nest</string>
+	<string>Sandbox</string>
+	<string>Sandtrap</string>
+	<string>Snowbound</string>
+	<string>Standoff</string>
+	<string>The Pit</string>
+	<string>Valhalla</string>
+</array>
+</plist>

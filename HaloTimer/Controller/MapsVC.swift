@@ -18,7 +18,6 @@ class MapsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         loadMaps()
-        print(maps.count)
     }
 
 
@@ -36,7 +35,7 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath) as? MapCell {
-            cell.configCell(with: maps[indexPath.row])
+            cell.configCell(with: maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row])
             return cell
         }
         
@@ -67,6 +66,16 @@ extension MapsVC {
         }
         
     }
+    
+    func removeAllMaps(at index: Int) {
+
+        Constants.context.delete(maps[index])
+        maps.remove(at: index)
+        save()
+        
+    }
+    
+  
     
 }
 

@@ -21,6 +21,8 @@
 		1D46C74C264B311D00DCED7B /* HaloFont in Resources */ = {isa = PBXBuildFile; fileRef = 1D46C74B264B311D00DCED7B /* HaloFont */; };
 		1D46C74E264B324500DCED7B /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C74D264B324500DCED7B /* MapCell.swift */; };
 		1D46C751264B355A00DCED7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C750264B355A00DCED7B /* Constants.swift */; };
+		1D832DD6264B53AC0010701A /* Maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD5264B53AC0010701A /* Maps.plist */; };
+		1D832DD8264B61430010701A /* MapImageNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD7264B61430010701A /* MapImageNames.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		1D46C74B264B311D00DCED7B /* HaloFont */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HaloFont; sourceTree = SOURCE_ROOT; };
 		1D46C74D264B324500DCED7B /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		1D46C750264B355A00DCED7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1D832DD5264B53AC0010701A /* Maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Maps.plist; sourceTree = "<group>"; };
+		1D832DD7264B61430010701A /* MapImageNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MapImageNames.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				1D46C743264B27A900DCED7B /* Weapon+CoreDataClass.swift */,
 				1D46C745264B27A900DCED7B /* Map+CoreDataClass.swift */,
+				1D832DD5264B53AC0010701A /* Maps.plist */,
+				1D832DD7264B61430010701A /* MapImageNames.plist */,
 				1D46C720264B266D00DCED7B /* HaloTimer */,
 				1D46C71F264B266D00DCED7B /* Products */,
 			);
@@ -182,8 +188,10 @@
 			files = (
 				1D46C731264B266F00DCED7B /* LaunchScreen.storyboard in Resources */,
 				1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */,
+				1D832DD8264B61430010701A /* MapImageNames.plist in Resources */,
 				1D46C729264B266D00DCED7B /* Main.storyboard in Resources */,
 				1D46C74C264B311D00DCED7B /* HaloFont in Resources */,
+				1D832DD6264B53AC0010701A /* Maps.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

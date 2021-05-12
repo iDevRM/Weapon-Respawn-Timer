@@ -17,10 +17,10 @@ class MapCell: UITableViewCell {
     func configCell(with map: Map) {
         if let name = map.mapName,
            let image = map.imageName {
-            mapImageView.image = UIImage(named: "\(image)")!
+            mapImageView.image = UIImage(named: image)!
             nameLabel.text = name
         }
-       
+        
     }
 
 }
