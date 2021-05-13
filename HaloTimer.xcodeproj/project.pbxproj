@@ -22,7 +22,7 @@
 		1D46C74E264B324500DCED7B /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C74D264B324500DCED7B /* MapCell.swift */; };
 		1D46C751264B355A00DCED7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C750264B355A00DCED7B /* Constants.swift */; };
 		1D832DD6264B53AC0010701A /* Maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD5264B53AC0010701A /* Maps.plist */; };
-		1D832DD8264B61430010701A /* MapImageNames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD7264B61430010701A /* MapImageNames.plist */; };
+		5A7AFA8421E7C5460EF8BF76 /* Pods_HaloTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,7 +43,9 @@
 		1D46C74D264B324500DCED7B /* MapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		1D46C750264B355A00DCED7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1D832DD5264B53AC0010701A /* Maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Maps.plist; sourceTree = "<group>"; };
-		1D832DD7264B61430010701A /* MapImageNames.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MapImageNames.plist; sourceTree = "<group>"; };
+		29D5FA343B2FEDBCCD16E931 /* Pods-HaloTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaloTimer.release.xcconfig"; path = "Target Support Files/Pods-HaloTimer/Pods-HaloTimer.release.xcconfig"; sourceTree = "<group>"; };
+		96E6013F14F27E60074E793F /* Pods-HaloTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaloTimer.debug.xcconfig"; path = "Target Support Files/Pods-HaloTimer/Pods-HaloTimer.debug.xcconfig"; sourceTree = "<group>"; };
+		99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaloTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7AFA8421E7C5460EF8BF76 /* Pods_HaloTimer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,9 +66,10 @@
 				1D46C743264B27A900DCED7B /* Weapon+CoreDataClass.swift */,
 				1D46C745264B27A900DCED7B /* Map+CoreDataClass.swift */,
 				1D832DD5264B53AC0010701A /* Maps.plist */,
-				1D832DD7264B61430010701A /* MapImageNames.plist */,
 				1D46C720264B266D00DCED7B /* HaloTimer */,
 				1D46C71F264B266D00DCED7B /* Products */,
+				A70EC9B56628EF48A245900D /* Pods */,
+				7F4903BB072DBCB86D504BA5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +133,24 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		7F4903BB072DBCB86D504BA5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A70EC9B56628EF48A245900D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				96E6013F14F27E60074E793F /* Pods-HaloTimer.debug.xcconfig */,
+				29D5FA343B2FEDBCCD16E931 /* Pods-HaloTimer.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -136,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D46C735264B266F00DCED7B /* Build configuration list for PBXNativeTarget "HaloTimer" */;
 			buildPhases = (
+				55CFA0C1CCC89447A24E7B7B /* [CP] Check Pods Manifest.lock */,
 				1D46C71A264B266D00DCED7B /* Sources */,
 				1D46C71B264B266D00DCED7B /* Frameworks */,
 				1D46C71C264B266D00DCED7B /* Resources */,
+				AEB0AE3FB3B6A23322F1F225 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,7 +212,6 @@
 			files = (
 				1D46C731264B266F00DCED7B /* LaunchScreen.storyboard in Resources */,
 				1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */,
-				1D832DD8264B61430010701A /* MapImageNames.plist in Resources */,
 				1D46C729264B266D00DCED7B /* Main.storyboard in Resources */,
 				1D46C74C264B311D00DCED7B /* HaloFont in Resources */,
 				1D832DD6264B53AC0010701A /* Maps.plist in Resources */,
@@ -196,6 +219,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55CFA0C1CCC89447A24E7B7B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HaloTimer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEB0AE3FB3B6A23322F1F225 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaloTimer/Pods-HaloTimer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HaloTimer/Pods-HaloTimer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HaloTimer/Pods-HaloTimer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D46C71A264B266D00DCED7B /* Sources */ = {
@@ -355,12 +420,14 @@
 		};
 		1D46C736264B266F00DCED7B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96E6013F14F27E60074E793F /* Pods-HaloTimer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5525GJ5XAJ;
 				INFOPLIST_FILE = HaloTimer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -368,18 +435,20 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickmartinez.HaloTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		1D46C737264B266F00DCED7B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29D5FA343B2FEDBCCD16E931 /* Pods-HaloTimer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5525GJ5XAJ;
 				INFOPLIST_FILE = HaloTimer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -387,7 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.rickmartinez.HaloTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

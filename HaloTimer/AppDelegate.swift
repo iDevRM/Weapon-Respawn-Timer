@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         preloadData()
-        preloadMapImageNames()
+       
         return true
     }
 
@@ -48,9 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let arrayOfMaps = NSArray(contentsOf: urlPath) as? [String] {
                     
                     do {
-                        for item in arrayOfMaps {
+                        for name in arrayOfMaps {
                             let newMap = Map(context: backgroundContext)
-                            newMap.mapName = item
+                            newMap.mapName = name
+                            newMap.imageName = name
                         }
                         
                         try backgroundContext.save()

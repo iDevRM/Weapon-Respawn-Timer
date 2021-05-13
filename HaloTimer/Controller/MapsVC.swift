@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import ViewAnimator
 
 class MapsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -18,6 +19,15 @@ class MapsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         loadMaps()
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        let navAnimation = AnimationType.vector(CGVector(dx: view.frame.maxX, dy: 0))
+        let animation = AnimationType.vector(CGVector(dx: 0, dy: view.frame.height))
+        UIView.animate(views: tableView.visibleCells,
+                       animations: [animation],delay: 1, duration: 1.8)
+        UIView.animate(views: [navigationController!.navigationBar], animations: [navAnimation], initialAlpha: 0.2, finalAlpha: 1, duration: 1.8)
     }
 
 
