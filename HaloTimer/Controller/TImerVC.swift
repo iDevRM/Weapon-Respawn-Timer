@@ -9,21 +9,54 @@ import UIKit
 
 class TImerVC: UIViewController {
 
+    @IBOutlet weak var backgroundView: UIView!
+    
+    @IBOutlet weak var startButton: UIButton!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var timerBackgroundView: UIView!
+    
+    @IBOutlet weak var pictureBackroundView: UIView!
+    
+    @IBOutlet weak var pictureVIew: UIImageView!
+    
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var infoButton: UIBarButtonItem!
+    
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    var selectedMap: Map?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let map = selectedMap {
+            timerLabel.text = map.mapName!
+            startButton.layer.cornerRadius = 10
+            startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
+            backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
+        }
+    }
+    
+    @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {
+    }
+    
+    @IBAction func startButtonTapped(_ sender: UIButton) {
     }
     
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    
 }
