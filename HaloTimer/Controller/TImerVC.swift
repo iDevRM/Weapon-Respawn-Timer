@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TImerVC: UIViewController {
 
@@ -29,6 +30,8 @@ class TImerVC: UIViewController {
     
     var selectedMap: Map?
     
+    var maps = [Map]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,9 +43,39 @@ class TImerVC: UIViewController {
             pictureBackroundView.layer.cornerRadius = 10
             backgroundImageView.layer.cornerRadius = 10
             collectionView.layer.cornerRadius = 10
-            
+        }
+        
+        loadMaps()
+        let newArray = maps.filter { $0.mapName == selectedMap?.mapName }
+        
+        let newMap = newArray.first!
+        let weapon = Weapon(context: Constants.context)
+        weapon.name = "Sniper Rifle"
+        
+        newMap.weapons! = weapon as NSSet
+        
+    }
+    
+    func loadMaps() {
+        let request: NSFetchRequest<Map> = Map.fetchRequest()
+        
+        do {
+            maps = try Constants.context.fetch(request)
+        } catch {
+            print(error.localizedDescription)
         }
     }
+    
+    func save() {
+        
+        do {
+            try Constants.context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
     
     @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {
     }
