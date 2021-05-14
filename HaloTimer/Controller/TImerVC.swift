@@ -37,6 +37,10 @@ class TImerVC: UIViewController {
             startButton.layer.cornerRadius = 10
             startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
             backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
+            pictureBackroundView.layer.cornerRadius = 10
+            backgroundImageView.layer.cornerRadius = 10
+            collectionView.layer.cornerRadius = 10
+            
         }
     }
     

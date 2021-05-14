@@ -23,6 +23,8 @@
 		1D46C751264B355A00DCED7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C750264B355A00DCED7B /* Constants.swift */; };
 		1D832DD6264B53AC0010701A /* Maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD5264B53AC0010701A /* Maps.plist */; };
 		1DAAB0AC264DAD790048C3D0 /* TImerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAAB0AB264DAD790048C3D0 /* TImerVC.swift */; };
+		1DBB5655264DEEC70072808D /* Weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB5654264DEEC70072808D /* Weapons.plist */; };
+		1DBB5657264E06700072808D /* WeaponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB5656264E06700072808D /* WeaponCell.swift */; };
 		5A7AFA8421E7C5460EF8BF76 /* Pods_HaloTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		1D46C750264B355A00DCED7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1D832DD5264B53AC0010701A /* Maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Maps.plist; sourceTree = "<group>"; };
 		1DAAB0AB264DAD790048C3D0 /* TImerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImerVC.swift; sourceTree = "<group>"; };
+		1DBB5654264DEEC70072808D /* Weapons.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Weapons.plist; sourceTree = "<group>"; };
+		1DBB5656264E06700072808D /* WeaponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCell.swift; sourceTree = "<group>"; };
 		29D5FA343B2FEDBCCD16E931 /* Pods-HaloTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaloTimer.release.xcconfig"; path = "Target Support Files/Pods-HaloTimer/Pods-HaloTimer.release.xcconfig"; sourceTree = "<group>"; };
 		96E6013F14F27E60074E793F /* Pods-HaloTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaloTimer.debug.xcconfig"; path = "Target Support Files/Pods-HaloTimer/Pods-HaloTimer.debug.xcconfig"; sourceTree = "<group>"; };
 		99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HaloTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				1D46C744264B27A900DCED7B /* Weapon+CoreDataProperties.swift */,
+				1DBB5654264DEEC70072808D /* Weapons.plist */,
 				1D46C746264B27A900DCED7B /* Map+CoreDataProperties.swift */,
 			);
 			path = Model;
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				1D46C74D264B324500DCED7B /* MapCell.swift */,
+				1DBB5656264E06700072808D /* WeaponCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DBB5655264DEEC70072808D /* Weapons.plist in Resources */,
 				1D46C731264B266F00DCED7B /* LaunchScreen.storyboard in Resources */,
 				1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */,
 				1D46C729264B266D00DCED7B /* Main.storyboard in Resources */,
@@ -270,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D46C74A264B27A900DCED7B /* Map+CoreDataProperties.swift in Sources */,
+				1DBB5657264E06700072808D /* WeaponCell.swift in Sources */,
 				1D46C726264B266D00DCED7B /* MapsVC.swift in Sources */,
 				1D46C74E264B324500DCED7B /* MapCell.swift in Sources */,
 				1D46C748264B27A900DCED7B /* Weapon+CoreDataProperties.swift in Sources */,
