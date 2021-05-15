@@ -31,10 +31,12 @@ class TImerVC: UIViewController {
     var selectedMap: Map?
     
     var maps = [Map]()
+    var weaponSet = Set<Weapon>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         if let map = selectedMap {
             timerLabel.text = map.mapName!
             startButton.layer.cornerRadius = 10
@@ -46,14 +48,15 @@ class TImerVC: UIViewController {
         }
         
         loadMaps()
-        let newArray = maps.filter { $0.mapName == selectedMap?.mapName }
-        
-        let newMap = newArray.first!
-        let weapon = Weapon(context: Constants.context)
-        weapon.name = "Sniper Rifle"
-        
-        newMap.weapons! = weapon as NSSet
-        
+//        let newArray = maps.filter { $0.mapName == selectedMap?.mapName }
+//
+//        let newMap = newArray.first!
+//        let weapon = Weapon(context: Constants.context)
+//        weapon.name = "Sniper Rifle"
+//        weaponSet.insert(weapon)
+//
+//        newMap.weapons = weaponSet as NSSet
+//
     }
     
     func loadMaps() {
@@ -88,10 +91,14 @@ class TImerVC: UIViewController {
 
 extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return weaponSet.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weaponCell", for: indexPath) as? WeaponCell {
+            cell.configCell(weaponSet.first!)
+            return cell
+        }
         return UICollectionViewCell()
     }
     
