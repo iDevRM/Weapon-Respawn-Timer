@@ -30,7 +30,7 @@ class MapsVC: UIViewController {
             let navAnimation = AnimationType.vector(CGVector(dx: view.frame.maxX, dy: 0))
             let animation = AnimationType.vector(CGVector(dx: 0, dy: view.frame.height))
             UIView.animate(views: tableView.visibleCells,
-                           animations: [animation],delay: 1, duration: 1.8)
+                           animations: [animation], duration: 1.8)
             UIView.animate(views: [navigationController!.navigationBar], animations: [navAnimation], initialAlpha: 0.2, finalAlpha: 1, duration: 1.8)
             didAnimate = true
         }

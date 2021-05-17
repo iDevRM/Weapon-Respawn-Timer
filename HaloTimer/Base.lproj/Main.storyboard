@@ -139,29 +139,35 @@
                                             <constraint firstAttribute="height" constant="150" id="3Gr-KR-urL"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hjT-Pr-nWk">
-                                            <size key="itemSize" width="124" height="151"/>
+                                            <size key="itemSize" width="107" height="134"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="weaponCell" id="txs-H1-7Co" customClass="WeaponCell" customModule="HaloTimer" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-0.5" width="124" height="151"/>
+                                                <rect key="frame" x="0.0" y="8" width="107" height="134"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4Nz-MZ-0qY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="124" height="151"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="107" height="134"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jax-zY-ukS">
-                                                            <rect key="frame" x="8" y="8" width="108" height="135"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Jax-zY-ukS">
+                                                            <rect key="frame" x="8" y="8" width="91" height="118"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNo-PA-NPH">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="108" height="109"/>
+                                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f9g-qj-bNO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="91" height="59"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="f9g-qj-bNO" secondAttribute="height" multiplier="91:55" id="bH4-Mf-JEh"/>
+                                                                        <constraint firstAttribute="width" constant="91" id="g88-09-HpT"/>
+                                                                        <constraint firstAttribute="height" constant="55" id="grE-1D-dm7"/>
+                                                                    </constraints>
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rocket Launcher" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="L7T-iU-xGp">
-                                                                    <rect key="frame" x="0.0" y="117" width="108" height="18"/>
-                                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="18"/>
-                                                                    <nil key="textColor"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaO-yV-hT3">
+                                                                    <rect key="frame" x="0.0" y="59" width="91" height="59"/>
+                                                                    <fontDescription key="fontDescription" name="MyriadPro-Regular" family="Myriad Pro" pointSize="14"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -174,10 +180,10 @@
                                                         <constraint firstItem="Jax-zY-ukS" firstAttribute="top" secondItem="4Nz-MZ-0qY" secondAttribute="top" constant="8" id="XVb-Uc-48X"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
-                                                <size key="customSize" width="124" height="151"/>
+                                                <size key="customSize" width="107" height="134"/>
                                                 <connections>
-                                                    <outlet property="imageView" destination="cNo-PA-NPH" id="piH-Mj-ZJh"/>
-                                                    <outlet property="weaponLabel" destination="L7T-iU-xGp" id="yRz-hu-GJH"/>
+                                                    <outlet property="imageView" destination="f9g-qj-bNO" id="CR1-BK-eW1"/>
+                                                    <outlet property="weaponLabel" destination="xaO-yV-hT3" id="SPE-2h-fpG"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

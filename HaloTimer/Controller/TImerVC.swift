@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Foundation
 
 class TImerVC: UIViewController {
 
@@ -30,8 +31,13 @@ class TImerVC: UIViewController {
     
     var selectedMap: Map?
     
-    var maps = [Map]()
+    var mapArray = [Map]()
+    var weaponArray = [Weapon]()
     var weaponSet = Set<Weapon>()
+    var timer: Timer?
+    
+    var weaponRespawnTime = 0
+    var timeForWeapon = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,24 +54,37 @@ class TImerVC: UIViewController {
         }
         
         loadMaps()
-//        let newArray = maps.filter { $0.mapName == selectedMap?.mapName }
-//
-//        let newMap = newArray.first!
-//        let weapon = Weapon(context: Constants.context)
-//        weapon.name = "Sniper Rifle"
-//        weaponSet.insert(weapon)
-//
-//        newMap.weapons = weaponSet as NSSet
-//
+       
+        loadWeaponsFromSelectedMap()
+       
+        
+    
+
     }
     
     func loadMaps() {
         let request: NSFetchRequest<Map> = Map.fetchRequest()
         
         do {
-            maps = try Constants.context.fetch(request)
+            mapArray = try Constants.context.fetch(request)
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func loadWeaponsFromSelectedMap() {
+        if let mapWeapons = selectedMap?.weapons {
+            if let unwrappedWeapons  = mapWeapons as? Set<Weapon> {
+                if let unwrappedTime = unwrappedWeapons.first?.respawnTime {
+                    weaponRespawnTime = Int(unwrappedTime)!
+                    timeForWeapon = Int(unwrappedTime)!
+                    timerLabel.text = unwrappedTime
+                }
+                
+                for weapon in unwrappedWeapons {
+                    weaponArray.append(weapon)
+                }
+            }
         }
     }
     
@@ -84,6 +103,28 @@ class TImerVC: UIViewController {
     }
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
+        
+        if sender.currentTitle == "Start" {
+            timeForWeapon = weaponRespawnTime
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+            timer!.fire()
+            sender.setTitle("Stop", for: .normal)
+        } else {
+            timer!.invalidate()
+            timer = nil
+            timerLabel.text = String(weaponRespawnTime)
+            sender.setTitle("Start", for: .normal)
+        }
+    }
+    
+    @objc func update() {
+        if timeForWeapon > 0 {
+            timerLabel.text = String(timeForWeapon)
+            timeForWeapon -= 1
+        } else if timeForWeapon == 0 {
+            timer!.invalidate()
+            timer = nil
+        }
     }
     
 
@@ -91,12 +132,12 @@ class TImerVC: UIViewController {
 
 extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weaponSet.count
+        return weaponArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weaponCell", for: indexPath) as? WeaponCell {
-            cell.configCell(weaponSet.first!)
+            cell.configCell(weaponArray[indexPath.row])
             return cell
         }
         return UICollectionViewCell()

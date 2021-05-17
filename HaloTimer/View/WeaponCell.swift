@@ -13,7 +13,7 @@ class WeaponCell: UICollectionViewCell {
     @IBOutlet weak var weaponLabel: UILabel!
     
     func configCell(_ weapon: Weapon) {
-        weaponLabel.text = weapon.name
+        weaponLabel.text = weapon.name!
         imageView.image = UIImage(named: "\(weapon.name!)")
     }
     
