@@ -31,13 +31,13 @@ class TImerVC: UIViewController {
     
     var selectedMap: Map?
     
-    var mapArray = [Map]()
+    var mapArray    = [Map]()
     var weaponArray = [Weapon]()
-    var weaponSet = Set<Weapon>()
+    var weaponSet   = Set<Weapon>()
     var timer: Timer?
     
     var weaponRespawnTime = 0
-    var timeForWeapon = 0
+    var timeRemaining     = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,8 +77,8 @@ class TImerVC: UIViewController {
             if let unwrappedWeapons  = mapWeapons as? Set<Weapon> {
                 if let unwrappedTime = unwrappedWeapons.first?.respawnTime {
                     weaponRespawnTime = Int(unwrappedTime)!
-                    timeForWeapon = Int(unwrappedTime)!
-                    timerLabel.text = unwrappedTime
+                    timeRemaining = Int(unwrappedTime)!
+                    timerLabel.text = convertToString(from: Int(unwrappedTime)!)
                 }
                 
                 for weapon in unwrappedWeapons {
@@ -105,7 +105,7 @@ class TImerVC: UIViewController {
     @IBAction func startButtonTapped(_ sender: UIButton) {
         
         if sender.currentTitle == "Start" {
-            timeForWeapon = weaponRespawnTime
+            timeRemaining = weaponRespawnTime
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true)
             timer!.fire()
             sender.setTitle("Stop", for: .normal)
@@ -118,12 +118,20 @@ class TImerVC: UIViewController {
     }
     
     @objc func update() {
-        if timeForWeapon > 0 {
-            timerLabel.text = String(timeForWeapon)
-            timeForWeapon -= 1
-        } else if timeForWeapon == 0 {
+        if timeRemaining > 0 {
+            timerLabel.text = convertToString(from:timeRemaining)
+            timeRemaining -= 1
+        } else if timeRemaining == 0 {
             timer!.invalidate()
             timer = nil
+        }
+    }
+    
+    func convertToString(from number : Int) -> String {
+        if (number % 3600) % 60 < 10 {
+            return "\((number % 3600) / 60):0\((number % 3600) % 60)"
+        } else {
+            return "\((number % 3600) / 60):\((number % 3600) % 60)"
         }
     }
     
