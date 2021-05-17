@@ -51,6 +51,11 @@ class TImerVC: UIViewController {
             pictureBackroundView.layer.cornerRadius = 10
             backgroundImageView.layer.cornerRadius = 10
             collectionView.layer.cornerRadius = 10
+            timerBackgroundView.layer.cornerRadius = 10
+            timerLabel.backgroundColor = UIColor.black
+            timerLabel.layer.cornerRadius = 10
+           
+            
         }
         
         loadMaps()
@@ -114,17 +119,20 @@ class TImerVC: UIViewController {
             timer = nil
             timerLabel.text = String(weaponRespawnTime)
             sender.setTitle("Start", for: .normal)
+            backgroundImageView.backgroundColor = UIColor.purple
         }
     }
     
     @objc func update() {
-        if timeRemaining > 0 {
+        if timeRemaining >= 0 {
             timerLabel.text = convertToString(from:timeRemaining)
             timeRemaining -= 1
-        } else if timeRemaining == 0 {
-            timer!.invalidate()
-            timer = nil
+            if timeRemaining == 0 {
+                timerBackgroundView.tintColor = UIColor.green
+            }
         }
+        
+       
     }
     
     func convertToString(from number : Int) -> String {
@@ -139,6 +147,7 @@ class TImerVC: UIViewController {
 }
 
 extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return weaponArray.count
     }
@@ -149,6 +158,12 @@ extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let image = UIImage(named: weaponArray[indexPath.row].name!) {
+            pictureVIew.image = image
+        }
     }
     
     

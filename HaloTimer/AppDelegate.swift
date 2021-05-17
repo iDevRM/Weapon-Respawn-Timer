@@ -34,27 +34,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func preloadData() {
-        let preloadedDataKey = "pre-loadedData"
+        let preloadedDataKey = "preloadData"
         let userDefualts = UserDefaults.standard
         
+        
         if userDefualts.bool(forKey: preloadedDataKey) == false {
-            guard let urlPath = Bundle.main.url(forResource: "Maps", withExtension: "plist") else { return }
+            guard let urlPath = Bundle.main.url(forResource: "Maps", withExtension: "plist"),
+                  let urlPath2 = Bundle.main.url(forResource: "Weapons", withExtension: "plist") else { return }
             
             let backgroundContext = persistentContainer.newBackgroundContext()
             Constants.context.automaticallyMergesChangesFromParent = true
             
             backgroundContext.perform {
                 
-                if let arrayOfMaps = NSArray(contentsOf: urlPath) as? [String] {
+                if let arrayOfMaps = NSArray(contentsOf: urlPath) as? [String],
+                   let arraOfWeapons = NSArray(contentsOf: urlPath2) as? [String] {
+                    
+                    var weaponSet = Set<Weapon>()
+                    var arrayOfMadeMaps = [Map(context: backgroundContext)]
                     
                     do {
+                        for weaponName in arraOfWeapons {
+                            let newWeapon = Weapon(context: backgroundContext)
+                            newWeapon.name = weaponName
+                            weaponSet.insert(newWeapon)
+                        }
+                        
                         for name in arrayOfMaps {
                             let newMap = Map(context: backgroundContext)
                             newMap.mapName = name
                             newMap.imageName = name
+                            newMap.weapons = weaponSet as NSSet
+                            arrayOfMadeMaps.append(newMap)
                         }
                         
+                        
+                        
                         try backgroundContext.save()
+                        
+                        
                         
                         userDefualts.set(true, forKey: preloadedDataKey)
                     } catch {
@@ -62,48 +80,195 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
+        }
+        
+        func applyRespawnTimers(for map: Map) -> Map {
+            switch map.mapName {
+                case MapName.assembly.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.gravityHammer.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+                    
+                case MapName.avalanche.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.spartanLaser.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.rocketLauncher.rawValue:
+                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.fortyFiveSeconds.rawValue
+                                case WeaponName.shotgun.rawValue:
+                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+                    
+                case MapName.blackout.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.shotgun.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.energySword.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+                    
+                case MapName.citadel.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.rocketLauncher.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                                case WeaponName.shotgun.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    }
+                    
+                case MapName.coldStorage.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.rocketLauncher.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.shotgun.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+                    
+                case MapName.construct.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.spartanLaser.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                                case WeaponName.energySword.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                                case WeaponName.missilePod.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.flamethrower.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+                case MapName.epitaph.rawValue:
+                    if let weapons = map.weapons as? Set<Weapon> {
+                        for weapon in weapons {
+                            switch weapon.name {
+                                case WeaponName.sniperRifle.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.rocketLauncher.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.bruteShot.rawValue:
+                                    weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                                case WeaponName.shotgun.rawValue:
+                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                case WeaponName.gravityHammer.rawValue:
+                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                                default:
+                                    weapon.respawnTime = nil
+                            }
+                        }
+                    
+                    }
+               
+                    
+                default:
+                    break
+            }
+            return Map()
         }
 
     }
     
-    private func preloadMapImageNames() {
-        let preloadedDataKey = "pre-loadMapImageNames"
-        let userDefualts = UserDefaults.standard
-        
-        if userDefualts.bool(forKey: preloadedDataKey) == false {
-            guard let urlPath = Bundle.main.url(forResource: "MapImageNames", withExtension: "plist") else { return }
-            
-            let backgroundContext = persistentContainer.newBackgroundContext()
-            Constants.context.automaticallyMergesChangesFromParent = true
-            
-            backgroundContext.perform {
-                
-                if let mapImageNames = NSArray(contentsOf: urlPath) as? [String] {
-                    let request: NSFetchRequest<Map> = Map.fetchRequest()
-                    do {
-                        
-                        let maps = try Constants.context.fetch(request)
-                        
-                        for mapName in mapImageNames {
-                            for map in maps {
-                                if mapName == map.mapName {
-                                    map.imageName = mapName
-                                    print(map)
-                                }
-                            }
-                        }
-                        
-                        try backgroundContext.save()
-                        try Constants.context.save()
-                        userDefualts.set(true, forKey: preloadedDataKey)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            }
-        }
-
-    }
+    
+    
+    
+    
+    
+//    private func preloadMapImageNames() {
+//        let preloadedDataKey = "pre-loadMapImageNames"
+//        let userDefualts = UserDefaults.standard
+//
+//        if userDefualts.bool(forKey: preloadedDataKey) == false {
+//            guard let urlPath = Bundle.main.url(forResource: "MapImageNames", withExtension: "plist") else { return }
+//
+//            let backgroundContext = persistentContainer.newBackgroundContext()
+//            Constants.context.automaticallyMergesChangesFromParent = true
+//
+//            backgroundContext.perform {
+//
+//                if let mapImageNames = NSArray(contentsOf: urlPath) as? [String] {
+//                    let request: NSFetchRequest<Map> = Map.fetchRequest()
+//                    do {
+//
+//                        let maps = try Constants.context.fetch(request)
+//
+//                        for mapName in mapImageNames {
+//                            for map in maps {
+//                                if mapName == map.mapName {
+//                                    map.imageName = mapName
+//                                    print(map)
+//                                }
+//                            }
+//                        }
+//
+//                        try backgroundContext.save()
+//                        try Constants.context.save()
+//                        userDefualts.set(true, forKey: preloadedDataKey)
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
 
 
     // MARK: - Core Data stack
