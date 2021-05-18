@@ -18,7 +18,24 @@ extension Weapon {
 
     @NSManaged public var name: String?
     @NSManaged public var respawnTime: String?
-    @NSManaged public var maps: Map?
+    @NSManaged public var maps: NSSet?
+
+}
+
+// MARK: Generated accessors for maps
+extension Weapon {
+
+    @objc(addMapsObject:)
+    @NSManaged public func addToMaps(_ value: Map)
+
+    @objc(removeMapsObject:)
+    @NSManaged public func removeFromMaps(_ value: Map)
+
+    @objc(addMaps:)
+    @NSManaged public func addToMaps(_ values: NSSet)
+
+    @objc(removeMaps:)
+    @NSManaged public func removeFromMaps(_ values: NSSet)
 
 }
 

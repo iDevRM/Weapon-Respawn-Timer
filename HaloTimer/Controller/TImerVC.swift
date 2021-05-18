@@ -49,7 +49,7 @@ class TImerVC: UIViewController {
         if let firstWeapon = weaponArray.first {
             pictureVIew.image = UIImage(named: firstWeapon.name!)
         }
-        
+       
         startButton.layer.cornerRadius = 10
         startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
         backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
@@ -87,9 +87,12 @@ class TImerVC: UIViewController {
         
         if let weaponSet = mapArray.first?.weapons as? Set<Weapon> {
             for weapon in weaponSet {
-                if weapon.
+                if weapon.respawnTime != nil {
+                    weaponArray.append(weapon)
+                }
             }
         }
+        
         
         collectionView.reloadData()
     }

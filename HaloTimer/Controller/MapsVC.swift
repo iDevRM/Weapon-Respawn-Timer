@@ -69,7 +69,11 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMap = maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row]
-        print(maps.sorted { $0.mapName! < $1.mapName! }[indexPath.row].mapName!)
+        if let set = selectedMap?.weapons as? Set<Weapon> {
+            for i in set {
+                print(i.name!,i.respawnTime)
+            }
+        }
         performSegue(withIdentifier: "timerSegue", sender: nil)
     }
     
