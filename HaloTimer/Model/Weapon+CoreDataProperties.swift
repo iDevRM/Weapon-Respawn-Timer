@@ -2,7 +2,7 @@
 //  Weapon+CoreDataProperties.swift
 //  HaloTimer
 //
-//  Created by Ricardo Martinez on 5/11/21.
+//  Created by Ricardo Martinez on 5/18/21.
 //
 //
 

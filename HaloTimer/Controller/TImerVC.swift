@@ -31,7 +31,6 @@ class TImerVC: UIViewController {
     
     var selectedMap: Map?
     
-    var mapArray    = [Map]()
     var weaponArray = [Weapon]()
     var weaponSet   = Set<Weapon>()
     var timer: Timer?
@@ -41,69 +40,58 @@ class TImerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-        if selectedMap != nil {
-            startButton.layer.cornerRadius = 10
-            startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
-            backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
-            pictureBackroundView.layer.cornerRadius = 10
-            backgroundImageView.layer.cornerRadius = 10
-            collectionView.layer.cornerRadius = 10
-            timerBackgroundView.layer.cornerRadius = 10
-            timerLabel.backgroundColor = UIColor.black
-            timerLabel.layer.cornerRadius = 10
-        }
         
-        loadMaps()
-       
         loadWeaponsFromSelectedMap()
         
         if let firstWeapon = weaponArray.first {
             pictureVIew.image = UIImage(named: firstWeapon.name!)
         }
         
-        
-    
-
+        startButton.layer.cornerRadius = 10
+        startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
+        backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
+        pictureBackroundView.layer.cornerRadius = 10
+        backgroundImageView.layer.cornerRadius = 10
+        collectionView.layer.cornerRadius = 10
+        timerBackgroundView.layer.cornerRadius = 10
+        timerLabel.backgroundColor = UIColor.black
+        timerLabel.layer.cornerRadius = 10
     }
     
-    func loadMaps() {
-        let request: NSFetchRequest<Map> = Map.fetchRequest()
-        
-        do {
-            mapArray = try Constants.context.fetch(request)
-        } catch {
-            print(error.localizedDescription)
-        }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        weaponArray = []
+        selectedMap = nil
     }
     
     func loadWeaponsFromSelectedMap() {
-        if let mapWeapons = selectedMap?.weapons {
-            if let unwrappedWeapons  = mapWeapons as? Set<Weapon> {
-                for weapon in unwrappedWeapons {
-                    if weapon.respawnTime != nil {
-                        weaponArray.append(weapon)
-                    }
-                }
-               if let firstWeapon = weaponArray.first {
-                 let time = firstWeapon.respawnTime!
-                    weaponRespawnTime = Int(time)!
-                    timeRemaining = Int(time)!
-                    timerLabel.text = convertToString(from: Int(time)!)
-                 }
-              }
-        }
-    }
-    
-    func save() {
         
-        do {
-            try Constants.context.save()
-        } catch {
-            print(error.localizedDescription)
+        var mapArray = [Map]()
+        
+        if let unwrappedName = selectedMap?.mapName! {
+            let predicate = NSPredicate(format: "mapName == %@", unwrappedName)
+            
+            let mapRequest: NSFetchRequest<Map> = Map.fetchRequest()
+            mapRequest.predicate = predicate
+            
+            do {
+               mapArray = try Constants.context.fetch(mapRequest)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
         
+        if let weaponSet = mapArray.first?.weapons as? Set<Weapon> {
+            for weapon in weaponSet {
+                if weapon.
+            }
+        }
+        
+        collectionView.reloadData()
     }
     
     

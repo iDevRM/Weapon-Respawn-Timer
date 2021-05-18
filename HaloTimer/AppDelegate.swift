@@ -48,27 +48,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             backgroundContext.perform {
                 
                 if let arrayOfMaps = NSArray(contentsOf: urlPath) as? [String],
-                   let arraOfWeapons = NSArray(contentsOf: urlPath2) as? [String] {
+                   let arrayOfWeapons = NSArray(contentsOf: urlPath2) as? [String] {
+                    
+                    let mapRequest: NSFetchRequest<Map> = Map.fetchRequest()
                     
                     var weaponSet = Set<Weapon>()
                     var arrayOfMadeMaps = [Map]()
                     
                     do {
-                        for weaponName in arraOfWeapons {
-                            let newWeapon = Weapon(context: backgroundContext)
-                            newWeapon.name = weaponName
-                            weaponSet.insert(newWeapon)
-                        }
-                        
                         for name in arrayOfMaps {
                             let newMap = Map(context: backgroundContext)
                             newMap.mapName = name
                             newMap.imageName = name
-                            newMap.weapons = weaponSet as NSSet
-                            arrayOfMadeMaps.append(newMap)
                         }
                         
+                        for weaponName in arrayOfWeapons {
+                            let newWeapon = Weapon(context:backgroundContext)
+                            newWeapon.name = weaponName
+                            weaponSet.insert(newWeapon)
+                        }
+                        
+                        try backgroundContext.save()
+                        
+                        arrayOfMadeMaps = try backgroundContext.fetch(mapRequest)
+                        
                         for map in arrayOfMadeMaps {
+                            map.weapons = weaponSet as NSSet
                             self.applyRespawnTimers(for: map)
                         }
                         
@@ -78,29 +83,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     } catch {
                         print(error.localizedDescription)
                     }
+                    
                 }
             }
         }
     }
     
     func applyRespawnTimers(for map: Map) {
-        print(map.mapName)
+        
+        let backgroundContext = persistentContainer.newBackgroundContext()
         switch map.mapName {
             case MapName.assembly.rawValue:
                 if let weapons = map.weapons as? Set<Weapon> {
                     for weapon in weapons {
                         switch weapon.name {
                             case WeaponName.bruteShot.rawValue:
-                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
                             case WeaponName.gravityHammer.rawValue:
                                 weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                            case WeaponName.bruteShot.rawValue:
-                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
                             default:
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.avalanche.rawValue:
@@ -121,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.blackout.rawValue:
@@ -138,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.citadel.rawValue:
@@ -173,7 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.construct.rawValue:
@@ -196,7 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.epitaph.rawValue:
@@ -217,7 +224,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.foundry.rawValue:
@@ -234,14 +241,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.ghostTown.rawValue:
                 if let weapons = map.weapons as? Set<Weapon> {
                     for weapon in weapons {
                         switch weapon.name {
-                            
                             case WeaponName.sniperRifle.rawValue:
                                 weapon.respawnTime = RespawnTime.twoMinutes.rawValue
                             case WeaponName.rocketLauncher.rawValue:
@@ -252,7 +258,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.guardian.rawValue:
@@ -269,7 +275,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.heretic.rawValue:
@@ -284,7 +290,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.highGround.rawValue:
@@ -303,7 +309,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.isolation.rawValue:
@@ -320,7 +326,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.lastResort.rawValue:
@@ -337,7 +343,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.longshore.rawValue:
@@ -354,7 +360,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.narrows.rawValue:
@@ -373,7 +379,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.ratsNest.rawValue:
@@ -396,7 +402,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.orbital.rawValue:
@@ -411,7 +417,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.thePit.rawValue:
@@ -430,7 +436,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.snowbound.rawValue:
@@ -447,7 +453,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.standoff.rawValue:
@@ -462,7 +468,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
                 
             case MapName.sandtrap.rawValue:
@@ -487,7 +493,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
                 }
                 
             case MapName.valhalla.rawValue:
@@ -508,15 +513,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = nil
                         }
                     }
-                
+                    
                 }
-           
+                
+            case MapName.sandbox.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                    
+                }
+                do {
+                    try backgroundContext.save()
+                } catch {
+                    print(error.localizedDescription)
+                }
                 
             default:
                 break
         }
-    
-       
+        
+        
     }
     
     

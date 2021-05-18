@@ -42,6 +42,7 @@ class MapsVC: UIViewController {
         if let destVC = segue.destination as? TImerVC {
             destVC.selectedMap = self.selectedMap
         }
+        selectedMap = nil
     }
 
 
@@ -68,6 +69,7 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMap = maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row]
+        print(maps.sorted { $0.mapName! < $1.mapName! }[indexPath.row].mapName!)
         performSegue(withIdentifier: "timerSegue", sender: nil)
     }
     
