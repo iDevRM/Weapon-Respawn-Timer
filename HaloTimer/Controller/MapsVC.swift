@@ -22,6 +22,7 @@ class MapsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         loadMaps()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,7 +59,7 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath) as? MapCell {
-            cell.configCell(with: maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row])
+            cell.configCell(with: maps.sorted { $0.mapName! < $1.mapName! }[indexPath.row])
             return cell
         }
         

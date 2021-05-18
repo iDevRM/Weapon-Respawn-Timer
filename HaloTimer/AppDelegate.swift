@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    let arraOfWeapons = NSArray(contentsOf: urlPath2) as? [String] {
                     
                     var weaponSet = Set<Weapon>()
-                    var arrayOfMadeMaps = [Map(context: backgroundContext)]
+                    var arrayOfMadeMaps = [Map]()
                     
                     do {
                         for weaponName in arraOfWeapons {
@@ -68,11 +68,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             arrayOfMadeMaps.append(newMap)
                         }
                         
-                        
+                        for map in arrayOfMadeMaps {
+                            self.applyRespawnTimers(for: map)
+                        }
                         
                         try backgroundContext.save()
-                        
-                        
                         
                         userDefualts.set(true, forKey: preloadedDataKey)
                     } catch {
@@ -81,149 +81,442 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
-        func applyRespawnTimers(for map: Map) -> Map {
-            switch map.mapName {
-                case MapName.assembly.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.gravityHammer.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
-                        }
-                    
-                    }
-                    
-                case MapName.avalanche.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.spartanLaser.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.rocketLauncher.rawValue:
-                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.fortyFiveSeconds.rawValue
-                                case WeaponName.shotgun.rawValue:
-                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
-                        }
-                    
-                    }
-                    
-                case MapName.blackout.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.shotgun.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.energySword.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
-                        }
-                    
-                    }
-                    
-                case MapName.citadel.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.rocketLauncher.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.oneMinute.rawValue
-                                case WeaponName.shotgun.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
+    }
+    
+    func applyRespawnTimers(for map: Map) {
+        print(map.mapName)
+        switch map.mapName {
+            case MapName.assembly.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
                         }
                     }
-                    
-                case MapName.coldStorage.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.rocketLauncher.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.shotgun.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
+                
+                }
+                
+            case MapName.avalanche.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.fortyFiveSeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            default:
+                                weapon.respawnTime = nil
                         }
-                    
                     }
-                    
-                case MapName.construct.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.spartanLaser.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.thirySeconds.rawValue
-                                case WeaponName.energySword.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
-                                case WeaponName.missilePod.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.flamethrower.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
+                
+                }
+                
+            case MapName.blackout.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            default:
+                                weapon.respawnTime = nil
                         }
-                    
                     }
-                case MapName.epitaph.rawValue:
-                    if let weapons = map.weapons as? Set<Weapon> {
-                        for weapon in weapons {
-                            switch weapon.name {
-                                case WeaponName.sniperRifle.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.rocketLauncher.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.bruteShot.rawValue:
-                                    weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
-                                case WeaponName.shotgun.rawValue:
-                                    weapon.respawnTime = RespawnTime.twoMinutes.rawValue
-                                case WeaponName.gravityHammer.rawValue:
-                                    weapon.respawnTime = RespawnTime.threeMinutes.rawValue
-                                default:
-                                    weapon.respawnTime = nil
-                            }
+                
+                }
+                
+            case MapName.citadel.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
                         }
-                    
                     }
-               
-                    
-                default:
-                    break
-            }
-            return Map()
+                }
+                
+            case MapName.coldStorage.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.construct.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.flamethrower.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.epitaph.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.foundry.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.ghostTown.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeAndAHalf.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.guardian.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.heretic.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.highGround.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.isolation.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.lastResort.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.longshore.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.narrows.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.ratsNest.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.orbital.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.thePit.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.snowbound.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.standoff.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.sandtrap.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+                
+            case MapName.valhalla.rawValue:
+                if let weapons = map.weapons as? Set<Weapon> {
+                    for weapon in weapons {
+                        switch weapon.name {
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                        }
+                    }
+                
+                }
+           
+                
+            default:
+                break
         }
-
+    
+       
     }
     
     

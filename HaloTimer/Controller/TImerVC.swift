@@ -43,8 +43,7 @@ class TImerVC: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        if let map = selectedMap {
-            timerLabel.text = map.mapName!
+        if selectedMap != nil {
             startButton.layer.cornerRadius = 10
             startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
             backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
@@ -54,14 +53,16 @@ class TImerVC: UIViewController {
             timerBackgroundView.layer.cornerRadius = 10
             timerLabel.backgroundColor = UIColor.black
             timerLabel.layer.cornerRadius = 10
-           
-            
         }
         
         loadMaps()
        
         loadWeaponsFromSelectedMap()
-       
+        
+        if let firstWeapon = weaponArray.first {
+            pictureVIew.image = UIImage(named: firstWeapon.name!)
+        }
+        
         
     
 
@@ -80,16 +81,18 @@ class TImerVC: UIViewController {
     func loadWeaponsFromSelectedMap() {
         if let mapWeapons = selectedMap?.weapons {
             if let unwrappedWeapons  = mapWeapons as? Set<Weapon> {
-                if let unwrappedTime = unwrappedWeapons.first?.respawnTime {
-                    weaponRespawnTime = Int(unwrappedTime)!
-                    timeRemaining = Int(unwrappedTime)!
-                    timerLabel.text = convertToString(from: Int(unwrappedTime)!)
-                }
-                
                 for weapon in unwrappedWeapons {
-                    weaponArray.append(weapon)
+                    if weapon.respawnTime != nil {
+                        weaponArray.append(weapon)
+                    }
                 }
-            }
+               if let firstWeapon = weaponArray.first {
+                 let time = firstWeapon.respawnTime!
+                    weaponRespawnTime = Int(time)!
+                    timeRemaining = Int(time)!
+                    timerLabel.text = convertToString(from: Int(time)!)
+                 }
+              }
         }
     }
     

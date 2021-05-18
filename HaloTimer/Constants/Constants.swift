@@ -22,6 +22,7 @@ enum RespawnTime: String {
     case twoMinutes          = "120"
     case twoAndAHalf         = "150"
     case threeMinutes        = "180"
+    case threeAndAHalf       = "210"
 }
 
 enum WeaponName: String {
