@@ -12,6 +12,6 @@
     </entity>
     <elements>
         <element name="Map" positionX="-63" positionY="-18" width="128" height="74"/>
-        <element name="Weapon" positionX="231.789306640625" positionY="10.39813232421875" width="128" height="74"/>
+        <element name="Weapon" positionX="231.789306640625" positionY="10.39813232421875" width="128" height="88"/>
     </elements>
 </model>

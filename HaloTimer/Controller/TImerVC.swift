@@ -40,11 +40,14 @@ class TImerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for i in weaponArray {
+            print(i.name!,i.respawnTime!)
+        }
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        loadWeaponsFromSelectedMap()
+//        loadWeaponsFromSelectedMap()
         
         if let firstWeapon = weaponArray.first {
             pictureVIew.image = UIImage(named: firstWeapon.name!)
@@ -64,38 +67,9 @@ class TImerVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        weaponArray = []
-        selectedMap = nil
+        
     }
     
-    func loadWeaponsFromSelectedMap() {
-        
-        var mapArray = [Map]()
-        
-        if let unwrappedName = selectedMap?.mapName! {
-            let predicate = NSPredicate(format: "mapName == %@", unwrappedName)
-            
-            let mapRequest: NSFetchRequest<Map> = Map.fetchRequest()
-            mapRequest.predicate = predicate
-            
-            do {
-               mapArray = try Constants.context.fetch(mapRequest)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
-        if let weaponSet = mapArray.first?.weapons as? Set<Weapon> {
-            for weapon in weaponSet {
-                if weapon.respawnTime != nil {
-                    weaponArray.append(weapon)
-                }
-            }
-        }
-        
-        
-        collectionView.reloadData()
-    }
     
     
     @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {

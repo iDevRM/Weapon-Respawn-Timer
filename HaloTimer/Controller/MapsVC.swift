@@ -13,13 +13,13 @@ class MapsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var maps = [Map]()
-    var selectedMap: Map?
-    var timer = Timer()
-    var didAnimate = false
+    var selectedMap:   Map?
+    var timer        = Timer()
+    var didAnimate   = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
+        tableView.delegate   = self
         tableView.dataSource = self
         loadMaps()
         
@@ -40,9 +40,8 @@ class MapsVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destVC = segue.destination as? TImerVC {
-            destVC.selectedMap = self.selectedMap
+            destVC.weaponArray = fetchWeapons(for: selectedMap!.mapName!)
         }
-        selectedMap = nil
     }
 
 
@@ -69,11 +68,6 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMap = maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row]
-        if let set = selectedMap?.weapons as? Set<Weapon> {
-            for i in set {
-                print(i.name!,i.respawnTime)
-            }
-        }
         performSegue(withIdentifier: "timerSegue", sender: nil)
     }
     
@@ -90,6 +84,28 @@ extension MapsVC {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func fetchWeapons(for mapName: String) -> [Weapon] {
+        var secondArray = [Weapon]()
+        let weaponRequest: NSFetchRequest<Weapon> = Weapon.fetchRequest()
+        let predicate = NSPredicate(format: "maps.mapName CONTAINS[cd] %@", mapName)
+        
+        weaponRequest.predicate = predicate
+        
+        do {
+            let firstArray = try Constants.context.fetch(weaponRequest)
+            
+            for weapon in firstArray {
+                if weapon.respawnTime != nil {
+                    secondArray.append(weapon)
+                }
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        return secondArray
     }
     
     func save() {

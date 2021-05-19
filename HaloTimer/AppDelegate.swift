@@ -53,21 +53,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     var setOfWeapons = Set<Weapon>()
                    
                     do {
-                        for weaponName in arrayOfWeapons {
-                            let newWeapon = Weapon(context: backgroundContext)
-                            newWeapon.name = weaponName
-                            setOfWeapons.insert(newWeapon)
-                        }
                         
-                        for name in arrayOfMaps {
+                        for mapName in arrayOfMaps {
+                            setOfWeapons.removeAll()
                             let newMap = Map(context: backgroundContext)
-                            newMap.mapName = name
-                            newMap.imageName = name
+                            for weaponName in arrayOfWeapons {
+                                let newWeapon = Weapon(context: backgroundContext)
+                                newWeapon.name = weaponName
+                                setOfWeapons.insert(newWeapon)
+                            }
+                            newMap.mapName = mapName
+                            newMap.imageName = mapName
                             newMap.weapons = setOfWeapons as NSSet
                             newMap.weapons = addRespawnValues(to: newMap) as NSSet
+                           
                         }
-                        
-                        
                         
                         try backgroundContext.save()
                         
@@ -88,10 +88,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var weaponSet = Set<Weapon>()
             
             switch map.mapName! {
+                case MapName.assembly.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.avalanche.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.fortyFiveSeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
                 case MapName.blackout.rawValue:
                     for weapon in mapSet {
                         switch weapon.name! {
                             case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.citadel.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.coldStorage.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
                                 weapon.respawnTime = RespawnTime.twoMinutes.rawValue
                             default:
                                 weapon.respawnTime = nil
@@ -99,6 +173,353 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         weaponSet = mapSet
                     }
+                    
+                case MapName.construct.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.flamethrower.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.epitaph.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.foundry.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.ghostTown.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.guardian.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.heretic.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.highGround.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.isolation.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.lastResort.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.longshore.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.narrows.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.orbital.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.ratsNest.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.sandbox.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.sandtrap.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.gravityHammer.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.snowbound.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.beamRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.standoff.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.fortyFiveSeconds.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.thePit.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.energySword.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+
+                case MapName.valhalla.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.ninetySeconds.rawValue
+                            case WeaponName.spartanLaser.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.bruteShot.rawValue:
+                                weapon.respawnTime = RespawnTime.thirySeconds.rawValue
+                            case WeaponName.missilePod.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
                 default:
                     break
             }

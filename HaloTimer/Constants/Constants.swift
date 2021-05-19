@@ -35,6 +35,7 @@ enum WeaponName: String {
     case energySword    = "Energy Sword"
     case missilePod     = "Missile Pod"
     case flamethrower   = "Flamethrower"
+    case beamRifle      = "Beam Rifle"
 }
 
 enum MapName: String {
