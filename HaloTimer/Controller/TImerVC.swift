@@ -32,7 +32,7 @@ class TImerVC: UIViewController {
     var selectedMap: Map?
     
     var weaponArray = [Weapon]()
-    var weaponSet   = Set<Weapon>()
+    
     var timer: Timer?
     
     var weaponRespawnTime = 0
@@ -40,37 +40,29 @@ class TImerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in weaponArray {
-            print(i.name!,i.respawnTime!)
-        }
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
-//        loadWeaponsFromSelectedMap()
+        loadWeaponsFromSelectedMap()
         
         if let firstWeapon = weaponArray.first {
             pictureVIew.image = UIImage(named: firstWeapon.name!)
+            timerLabel.text = convertToMinutesAndSeconds(from: firstWeapon.respawnTime!)
+            weaponRespawnTime = Int(firstWeapon.respawnTime!)!
         }
        
         startButton.layer.cornerRadius = 10
-        startButton.backgroundColor = #colorLiteral(red: 0.5081628561, green: 0.7110635638, blue: 0.4669082761, alpha: 1)
-        backgroundView.backgroundColor = #colorLiteral(red: 0.3257828355, green: 0.5983628631, blue: 0.7235913277, alpha: 1)
+        timerBackgroundView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.85)
+        timerLabel.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
+        startButton.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.4666666667, blue: 0.4235294118, alpha: 0.85)
         pictureBackroundView.layer.cornerRadius = 10
         backgroundImageView.layer.cornerRadius = 10
         collectionView.layer.cornerRadius = 10
         timerBackgroundView.layer.cornerRadius = 10
-        timerLabel.backgroundColor = UIColor.black
         timerLabel.layer.cornerRadius = 10
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
         
+        pictureBackroundView.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.7960784314, blue: 0.6588235294, alpha: 0.85)
     }
-    
-    
     
     @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {
     }
@@ -93,21 +85,21 @@ class TImerVC: UIViewController {
     
     @objc func update() {
         if timeRemaining >= 0 {
-            timerLabel.text = convertToString(from:timeRemaining)
+            timerLabel.text = convertToMinutesAndSeconds(from: String(timeRemaining))
             timeRemaining -= 1
             if timeRemaining == 0 {
                 timerBackgroundView.tintColor = UIColor.green
             }
         }
-        
-       
     }
     
-    func convertToString(from number : Int) -> String {
-        if (number % 3600) % 60 < 10 {
-            return "\((number % 3600) / 60):0\((number % 3600) % 60)"
+    func convertToMinutesAndSeconds(from number : String) -> String {
+        guard let convertedNumber = Int(number) else { return "Error in converting string" }
+        
+        if (convertedNumber % 3600) % 60 < 10 {
+            return "\((convertedNumber % 3600) / 60):0\((convertedNumber % 3600) % 60)"
         } else {
-            return "\((number % 3600) / 60):\((number % 3600) % 60)"
+            return "\((convertedNumber % 3600) / 60):\((convertedNumber % 3600) % 60)"
         }
     }
     
@@ -129,10 +121,28 @@ extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let image = UIImage(named: weaponArray[indexPath.row].name!) {
+        if let image = UIImage(named: weaponArray[indexPath.row].name!),
+           let respawnTime = weaponArray[indexPath.row].respawnTime {
             pictureVIew.image = image
+            timerLabel.text = convertToMinutesAndSeconds(from: respawnTime)
+            weaponRespawnTime = Int(respawnTime)!
         }
     }
     
+    
+    
+}
+
+extension TImerVC {
+    
+    func loadWeaponsFromSelectedMap() {
+        if let weapons = selectedMap?.weapons?.allObjects as? [Weapon] {
+            for weapon in weapons {
+                if weapon.respawnTime != nil {
+                    weaponArray.append(weapon)
+                }
+            }
+        }
+    }
     
 }

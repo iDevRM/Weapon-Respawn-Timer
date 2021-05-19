@@ -40,7 +40,7 @@ class MapsVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destVC = segue.destination as? TImerVC {
-            destVC.weaponArray = fetchWeapons(for: selectedMap!.mapName!)
+            destVC.selectedMap = self.selectedMap
         }
     }
 
