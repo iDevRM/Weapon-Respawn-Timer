@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "haloBack.jpeg",
+      "filename" : "dirtySpawn.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "haloBack-1.jpeg",
+      "filename" : "dirtySpawn-1.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "haloBack-2.jpeg",
+      "filename" : "dirtySpawn-2.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

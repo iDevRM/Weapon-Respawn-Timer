@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 import Foundation
 
-class TImerVC: UIViewController {
+class TimerVC: UIViewController, UINavigationControllerDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     
@@ -38,6 +38,7 @@ class TImerVC: UIViewController {
     var weaponRespawnTime = 0
     var timeRemaining     = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
@@ -52,19 +53,58 @@ class TImerVC: UIViewController {
         }
        
         startButton.layer.cornerRadius = 10
-        timerBackgroundView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.85)
+        timerBackgroundView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.558723763)
         timerLabel.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
-        startButton.backgroundColor = #colorLiteral(red: 0.337254902, green: 0.4666666667, blue: 0.4235294118, alpha: 0.85)
+        startButton.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.558723763)
         pictureBackroundView.layer.cornerRadius = 10
         backgroundImageView.layer.cornerRadius = 10
         collectionView.layer.cornerRadius = 10
         timerBackgroundView.layer.cornerRadius = 10
         timerLabel.layer.cornerRadius = 10
-        
         pictureBackroundView.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.7960784314, blue: 0.6588235294, alpha: 0.85)
+        infoButton.tintColor = UIColor.white
+        timerBackgroundView.layer.shadowColor = UIColor.black.cgColor
+        timerBackgroundView.layer.shadowRadius = 5
+        timerBackgroundView.layer.shadowOpacity = 1
+        timerBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 20)
+        pictureBackroundView.layer.borderWidth = 3
+        pictureBackroundView.layer.borderColor = UIColor.white.cgColor
+        
+        timerLabel.layer.borderWidth = 3
+        timerLabel.layer.borderColor = UIColor.white.cgColor
+        startButton.layer.borderWidth = 3
+        startButton.layer.borderColor = UIColor.white.cgColor
+        
+    
+        pictureBackroundView.layer.shadowColor = UIColor.black.cgColor
+        pictureBackroundView.layer.shadowRadius = 5
+        pictureBackroundView.layer.shadowOpacity = 1
+        startButton.layer.shadowColor = UIColor.black.cgColor
+        startButton.layer.shadowRadius = 5
+        startButton.layer.shadowOpacity = 1
+        pictureVIew.layer.shadowOpacity = 1
+        pictureVIew.layer.shadowRadius = 5
+        pictureVIew.layer.shadowColor = UIColor.black.cgColor
+        pictureVIew.layer.shadowOffset = CGSize(width: -2, height: 5)
+        navigationController?.delegate = self
+        if let titleName = selectedMap?.mapName {
+            navigationItem.title = titleName
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+           
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? DirtySpawnVC {
+            destVC.mapImageName = selectedMap!.imageName!
+        }
     }
     
     @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {
+       
+        performSegue(withIdentifier: "dirtySpawnSegue", sender: nil)
+       
+        
     }
     
     @IBAction func startButtonTapped(_ sender: UIButton) {
@@ -106,7 +146,7 @@ class TImerVC: UIViewController {
 
 }
 
-extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TimerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return weaponArray.count
@@ -129,11 +169,11 @@ extension TImerVC: UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
-    
+
     
 }
 
-extension TImerVC {
+extension TimerVC {
     
     func loadWeaponsFromSelectedMap() {
         if let weapons = selectedMap?.weapons?.allObjects as? [Weapon] {

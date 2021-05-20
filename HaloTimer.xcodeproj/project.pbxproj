@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1185892656DE9100CD3FC8 /* DirtySpawnVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1185882656DE9100CD3FC8 /* DirtySpawnVC.swift */; };
+		1D45FA37265707E300B43B6D /* Myriad Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D45FA33265707E300B43B6D /* Myriad Pro Regular.ttf */; };
+		1D45FA38265707E300B43B6D /* Myriad Pro Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D45FA34265707E300B43B6D /* Myriad Pro Bold.ttf */; };
+		1D45FA39265707E300B43B6D /* Myriad Pro Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D45FA35265707E300B43B6D /* Myriad Pro Black.otf */; };
+		1D45FA3A265707E300B43B6D /* Myriad Pro Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D45FA36265707E300B43B6D /* Myriad Pro Light.otf */; };
 		1D46C722264B266D00DCED7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C721264B266D00DCED7B /* AppDelegate.swift */; };
 		1D46C724264B266D00DCED7B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C723264B266D00DCED7B /* SceneDelegate.swift */; };
 		1D46C726264B266D00DCED7B /* MapsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D46C725264B266D00DCED7B /* MapsVC.swift */; };
@@ -22,13 +27,18 @@
 		1D61AF8726544A9800D9A3C8 /* Weapon+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D61AF8326544A9800D9A3C8 /* Weapon+CoreDataClass.swift */; };
 		1D61AF8826544A9800D9A3C8 /* Weapon+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D61AF8426544A9800D9A3C8 /* Weapon+CoreDataProperties.swift */; };
 		1D832DD6264B53AC0010701A /* Maps.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D832DD5264B53AC0010701A /* Maps.plist */; };
-		1DAAB0AC264DAD790048C3D0 /* TImerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAAB0AB264DAD790048C3D0 /* TImerVC.swift */; };
+		1DAAB0AC264DAD790048C3D0 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAAB0AB264DAD790048C3D0 /* TimerVC.swift */; };
 		1DBB5655264DEEC70072808D /* Weapons.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB5654264DEEC70072808D /* Weapons.plist */; };
 		1DBB5657264E06700072808D /* WeaponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBB5656264E06700072808D /* WeaponCell.swift */; };
 		5A7AFA8421E7C5460EF8BF76 /* Pods_HaloTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C32E0948CB5E1816CC88E2 /* Pods_HaloTimer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D1185882656DE9100CD3FC8 /* DirtySpawnVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirtySpawnVC.swift; sourceTree = "<group>"; };
+		1D45FA33265707E300B43B6D /* Myriad Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Regular.ttf"; path = "HaloFont/Myriad Pro Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		1D45FA34265707E300B43B6D /* Myriad Pro Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Bold.ttf"; path = "HaloFont/Myriad Pro Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		1D45FA35265707E300B43B6D /* Myriad Pro Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Black.otf"; path = "HaloFont/Myriad Pro Black.otf"; sourceTree = SOURCE_ROOT; };
+		1D45FA36265707E300B43B6D /* Myriad Pro Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Myriad Pro Light.otf"; path = "HaloFont/Myriad Pro Light.otf"; sourceTree = SOURCE_ROOT; };
 		1D46C71E264B266D00DCED7B /* HaloTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaloTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D46C721264B266D00DCED7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D46C723264B266D00DCED7B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +56,7 @@
 		1D61AF8326544A9800D9A3C8 /* Weapon+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Weapon+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1D61AF8426544A9800D9A3C8 /* Weapon+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Weapon+CoreDataProperties.swift"; path = "../../Weapon+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1D832DD5264B53AC0010701A /* Maps.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Maps.plist; sourceTree = "<group>"; };
-		1DAAB0AB264DAD790048C3D0 /* TImerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TImerVC.swift; sourceTree = "<group>"; };
+		1DAAB0AB264DAD790048C3D0 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
 		1DBB5654264DEEC70072808D /* Weapons.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Weapons.plist; sourceTree = "<group>"; };
 		1DBB5656264E06700072808D /* WeaponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCell.swift; sourceTree = "<group>"; };
 		29D5FA343B2FEDBCCD16E931 /* Pods-HaloTimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HaloTimer.release.xcconfig"; path = "Target Support Files/Pods-HaloTimer/Pods-HaloTimer.release.xcconfig"; sourceTree = "<group>"; };
@@ -66,6 +76,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D45FA32265707CF00B43B6D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1D45FA35265707E300B43B6D /* Myriad Pro Black.otf */,
+				1D45FA34265707E300B43B6D /* Myriad Pro Bold.ttf */,
+				1D45FA36265707E300B43B6D /* Myriad Pro Light.otf */,
+				1D45FA33265707E300B43B6D /* Myriad Pro Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		1D46C715264B266D00DCED7B = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +118,7 @@
 				1D46C73A264B269200DCED7B /* View */,
 				1D46C738264B267F00DCED7B /* Controller */,
 				1D46C727264B266D00DCED7B /* Main.storyboard */,
+				1D45FA32265707CF00B43B6D /* Fonts */,
 				1D46C74B264B311D00DCED7B /* HaloFont */,
 				1D46C72D264B266F00DCED7B /* Assets.xcassets */,
 				1D46C72F264B266F00DCED7B /* LaunchScreen.storyboard */,
@@ -110,7 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				1D46C725264B266D00DCED7B /* MapsVC.swift */,
-				1DAAB0AB264DAD790048C3D0 /* TImerVC.swift */,
+				1DAAB0AB264DAD790048C3D0 /* TimerVC.swift */,
+				1D1185882656DE9100CD3FC8 /* DirtySpawnVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,12 +241,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D45FA37265707E300B43B6D /* Myriad Pro Regular.ttf in Resources */,
 				1DBB5655264DEEC70072808D /* Weapons.plist in Resources */,
 				1D46C731264B266F00DCED7B /* LaunchScreen.storyboard in Resources */,
 				1D46C72E264B266F00DCED7B /* Assets.xcassets in Resources */,
 				1D46C729264B266D00DCED7B /* Main.storyboard in Resources */,
 				1D46C74C264B311D00DCED7B /* HaloFont in Resources */,
 				1D832DD6264B53AC0010701A /* Maps.plist in Resources */,
+				1D45FA38265707E300B43B6D /* Myriad Pro Bold.ttf in Resources */,
+				1D45FA3A265707E300B43B6D /* Myriad Pro Light.otf in Resources */,
+				1D45FA39265707E300B43B6D /* Myriad Pro Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,11 +305,12 @@
 			files = (
 				1D61AF8726544A9800D9A3C8 /* Weapon+CoreDataClass.swift in Sources */,
 				1DBB5657264E06700072808D /* WeaponCell.swift in Sources */,
+				1D1185892656DE9100CD3FC8 /* DirtySpawnVC.swift in Sources */,
 				1D46C726264B266D00DCED7B /* MapsVC.swift in Sources */,
 				1D61AF8626544A9800D9A3C8 /* Map+CoreDataProperties.swift in Sources */,
 				1D61AF8526544A9800D9A3C8 /* Map+CoreDataClass.swift in Sources */,
 				1D46C74E264B324500DCED7B /* MapCell.swift in Sources */,
-				1DAAB0AC264DAD790048C3D0 /* TImerVC.swift in Sources */,
+				1DAAB0AC264DAD790048C3D0 /* TimerVC.swift in Sources */,
 				1D61AF8826544A9800D9A3C8 /* Weapon+CoreDataProperties.swift in Sources */,
 				1D46C751264B355A00DCED7B /* Constants.swift in Sources */,
 				1D46C722264B266D00DCED7B /* AppDelegate.swift in Sources */,

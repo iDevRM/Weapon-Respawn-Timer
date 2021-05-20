@@ -39,7 +39,7 @@ class MapsVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destVC = segue.destination as? TImerVC {
+        if let destVC = segue.destination as? TimerVC {
             destVC.selectedMap = self.selectedMap
         }
     }
