@@ -22,8 +22,9 @@ class MapsVC: UIViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         loadMaps()
-        
-    }
+       
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MyriadPro-Regular", size: 60)]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "MyriadPro-Regular", size: 35)]   }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)

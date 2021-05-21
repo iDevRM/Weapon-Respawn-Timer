@@ -89,9 +89,10 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
         navigationController?.delegate = self
         if let titleName = selectedMap?.mapName {
             navigationItem.title = titleName
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "MyriadPro-Regular", size: 35)]
            
         }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -110,21 +111,21 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
     @IBAction func startButtonTapped(_ sender: UIButton) {
         
         if sender.currentTitle == "Start" {
-            timeRemaining = weaponRespawnTime
+            sender.setTitle("Stop", for: .normal)
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true)
             timer!.fire()
-            sender.setTitle("Stop", for: .normal)
+            timeRemaining = weaponRespawnTime
         } else {
+            sender.setTitle("Start", for: .normal)
             timer!.invalidate()
             timer = nil
-            timerLabel.text = String(weaponRespawnTime)
-            sender.setTitle("Start", for: .normal)
+            timerLabel.text = convertToMinutesAndSeconds(from: String(timeRemaining))
             backgroundImageView.backgroundColor = UIColor.purple
         }
     }
     
     @objc func update() {
-        if timeRemaining >= 0 {
+        if timeRemaining > 0 {
             timerLabel.text = convertToMinutesAndSeconds(from: String(timeRemaining))
             timeRemaining -= 1
             if timeRemaining == 0 {
