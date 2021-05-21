@@ -87,7 +87,7 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
         pictureBackroundView.backgroundColor     = #colorLiteral(red: 0.7490196078, green: 0.7960784314, blue: 0.6588235294, alpha: 0.85)
         pictureBackroundView.layer.borderWidth   = 3
         pictureBackroundView.layer.borderColor   = UIColor.white.cgColor
-        pictureBackroundView.layer.cornerRadius  = 10
+        pictureBackroundView.layer.cornerRadius  = 6
         pictureBackroundView.layer.shadowColor   = UIColor.black.cgColor
         pictureBackroundView.layer.shadowRadius  = 5
         pictureBackroundView.layer.shadowOpacity = 1
