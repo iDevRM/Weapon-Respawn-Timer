@@ -7,15 +7,16 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    
+    var audioPlayer: AVAudioPlayer?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         preloadData()
-       
+        
         return true
     }
 
@@ -79,6 +80,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                 }
+            }
+            let url = URL(fileURLWithPath: Constants.audioPath2!)
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.play()
+            } catch {
+                print(error)
             }
         }
         
@@ -455,6 +463,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
                             case WeaponName.bruteShot.rawValue:
                                 weapon.respawnTime = RespawnTime.oneMinute.rawValue
+                            case WeaponName.beamRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoAndAHalf.rawValue
                             default:
                                 weapon.respawnTime = nil
                                 break

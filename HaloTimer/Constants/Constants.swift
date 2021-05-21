@@ -12,6 +12,12 @@ struct Constants {
     
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    static let audioPath1 = Bundle.main.path(forResource: "thirty_secs_remaining", ofType: "wav")
+    
+    static let audioPath2 = Bundle.main.path(forResource: "in", ofType: "wav")
+    
+    
+    
 }
 
 enum RespawnTime: String {
@@ -64,4 +70,5 @@ enum MapName: String {
     case isolation = "Isolation"
     case thePit = "The Pit"
 }
+
 
