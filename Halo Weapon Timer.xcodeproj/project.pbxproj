@@ -97,6 +97,7 @@
 				1D61AF8126544A9800D9A3C8 /* Map+CoreDataClass.swift */,
 				1D61AF8326544A9800D9A3C8 /* Weapon+CoreDataClass.swift */,
 				1D832DD5264B53AC0010701A /* Maps.plist */,
+				1DBB5654264DEEC70072808D /* Weapons.plist */,
 				1D46C720264B266D00DCED7B /* HaloTimer */,
 				1D46C71F264B266D00DCED7B /* Products */,
 				A70EC9B56628EF48A245900D /* Pods */,
@@ -148,7 +149,6 @@
 			children = (
 				1D61AF8226544A9800D9A3C8 /* Map+CoreDataProperties.swift */,
 				1D61AF8426544A9800D9A3C8 /* Weapon+CoreDataProperties.swift */,
-				1DBB5654264DEEC70072808D /* Weapons.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";

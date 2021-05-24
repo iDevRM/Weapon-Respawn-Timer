@@ -16,8 +16,6 @@ struct Constants {
     
     static let audioPath2 = Bundle.main.path(forResource: "in", ofType: "wav")
     
-    
-    
 }
 
 enum RespawnTime: String {
