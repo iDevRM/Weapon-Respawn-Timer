@@ -50,8 +50,10 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-        timer!.invalidate()
-        timer = nil
+        if timer != nil {
+            timer!.invalidate()
+            timer = nil
+        }
     }
     
 //MARK: - IBActions
