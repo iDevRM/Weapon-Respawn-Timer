@@ -22,7 +22,6 @@ class MapsVC: UIViewController {
         tableView.dataSource = self
         setCustomFontsForTitles()
         loadMaps()
-        
     }
         
     
