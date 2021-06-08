@@ -183,9 +183,6 @@ extension TimerVC {
         
         backgroundImageView.layer.cornerRadius = 10
         
-        infoButton.tintColor = UIColor.white
-       
-        
     }
     
     func setCustomFontForTitle() {

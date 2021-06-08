@@ -260,8 +260,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Timer" id="UCV-mS-pAY">
-                        <barButtonItem key="rightBarButtonItem" image="questionmark.circle" catalog="system" id="3UX-Aq-BnF">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <barButtonItem key="rightBarButtonItem" title="Dirty Spawn" id="3UX-Aq-BnF">
+                            <color key="tintColor" red="0.76350897549999996" green="0.80660885569999996" blue="0.68042093520000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="infoButtonTapped:" destination="wc8-30-MIK" id="vIX-b5-Yov"/>
                                 <segue destination="RgP-xz-QdM" kind="popoverPresentation" identifier="dirtySpawnSegue" popoverAnchorBarButtonItem="3UX-Aq-BnF" id="N92-L2-DKv">
@@ -388,7 +388,6 @@
         <image name="Valhalla" width="1000" height="563"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="backgroundForTimer" width="414" height="896"/>
-        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
