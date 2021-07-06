@@ -138,7 +138,7 @@
                                             <constraint firstItem="9L0-Ic-Z43" firstAttribute="leading" secondItem="XQ6-q8-zlN" secondAttribute="leading" constant="131" id="odb-6o-dEr"/>
                                         </constraints>
                                     </view>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WyA-gc-b8K">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WyA-gc-b8K">
                                         <rect key="frame" x="0.0" y="466" width="414" height="150"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>

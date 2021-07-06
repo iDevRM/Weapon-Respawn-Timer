@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             newMap.imageName = mapName
                             newMap.weapons = setOfWeapons as NSSet
                             newMap.weapons = addRespawnValues(to: newMap) as NSSet
-                           
                         }
                         
                         try backgroundContext.save()
@@ -529,6 +528,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                         weaponSet = mapSet
                     }
+                case MapName.waterfall.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.twoMinutes.rawValue
+                            case WeaponName.rocketAmmo.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                case MapName.edge.rawValue:
+                    for weapon in mapSet {
+                        switch weapon.name! {
+                            case WeaponName.sniperRifle.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.shotgun.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            case WeaponName.rocketLauncher.rawValue:
+                                weapon.respawnTime = RespawnTime.threeMinutes.rawValue
+                            default:
+                                weapon.respawnTime = nil
+                                break
+                        }
+                        weaponSet = mapSet
+                    }
+                    
+                    
                     
                 default:
                     break

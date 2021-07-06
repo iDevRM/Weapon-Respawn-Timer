@@ -56,7 +56,9 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath) as? MapCell {
             cell.configCell(with: maps.sorted { $0.mapName! < $1.mapName! }[indexPath.row])
+            
             return cell
+            
         }
         
         return UITableViewCell()
@@ -65,6 +67,7 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMap = maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row]
         performSegue(withIdentifier: "timerSegue", sender: nil)
+        
     }
 }
 

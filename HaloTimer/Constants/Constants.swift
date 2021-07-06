@@ -40,6 +40,7 @@ enum WeaponName: String {
     case missilePod     = "Missile Pod"
     case flamethrower   = "Flamethrower"
     case beamRifle      = "Beam Rifle"
+    case rocketAmmo     = "Rocket Ammo"
 }
 
 enum MapName: String {
@@ -67,6 +68,8 @@ enum MapName: String {
     case heretic = "Heretic"
     case isolation = "Isolation"
     case thePit = "The Pit"
+    case waterfall = "Waterfall"
+    case edge = "Edge"
 }
 
 
