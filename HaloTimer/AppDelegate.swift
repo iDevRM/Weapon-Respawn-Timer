@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         userDefualts.set(true, forKey: preloadedDataKey)
                     } catch {
-                        print(error.localizedDescription)
+                        debugPrint(error.localizedDescription)
                     }
                     
                 }
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.play()
             } catch {
-                print(error)
+                debugPrint(error)
             }
         }
         

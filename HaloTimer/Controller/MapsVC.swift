@@ -80,7 +80,7 @@ extension MapsVC {
         do {
             maps = try Constants.context.fetch(request)
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
         }
     }
     
@@ -89,7 +89,7 @@ extension MapsVC {
         do {
             try Constants.context.save()
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error.localizedDescription)
         }
         
     }

@@ -205,7 +205,7 @@ extension TimerVC {
                         self.audioPlayer = try AVAudioPlayer(contentsOf:url )
                         self.audioPlayer?.play()
                     } catch {
-                        print(error)
+                        debugPrint(error)
                     }
                 }
                 if self.timeRemaining == -1 {
