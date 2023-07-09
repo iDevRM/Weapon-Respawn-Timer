@@ -12,9 +12,9 @@ import ViewAnimator
 class MapsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var maps         = [Map]()
-    var selectedMap:   Map?
-    var didAnimate   = false
+    var maps = [Map]()
+    var selectedMap: Map?
+    var didAnimate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,6 @@ class MapsVC: UIViewController {
         if !didAnimate {
             performAnimations()
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,6 +43,7 @@ class MapsVC: UIViewController {
 
 //MARK: - Tableview Data Source and Delegate methods
 extension MapsVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return maps.count
     }
@@ -58,16 +58,19 @@ extension MapsVC: UITableViewDelegate, UITableViewDataSource {
             cell.configCell(with: maps.sorted { $0.mapName! < $1.mapName! }[indexPath.row])
             
             return cell
-            
         }
-        
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedMap = maps.sorted { $0.mapName! < $1.mapName!}[indexPath.row]
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.alpha = 0.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                cell.alpha = 1.0
+            }
+        }
         performSegue(withIdentifier: "timerSegue", sender: nil)
-        
     }
 }
 
@@ -91,17 +94,13 @@ extension MapsVC {
         } catch {
             debugPrint(error.localizedDescription)
         }
-        
     }
     
     func removeAllMaps(at index: Int) {
-
         Constants.context.delete(maps[index])
         maps.remove(at: index)
         save()
-        
     }
-    
 }
 
 //MARK: - Helper Functions
@@ -113,17 +112,12 @@ extension MapsVC {
     }
     
     func performAnimations() {
-        
         let navAnimation = AnimationType.vector(CGVector(dx: view.frame.maxX, dy: 0))
         let animation = AnimationType.vector(CGVector(dx: 0, dy: view.frame.height))
         UIView.animate(views: tableView.visibleCells,
                        animations: [animation], duration: 1.8)
         UIView.animate(views: [navigationController!.navigationBar], animations: [navAnimation], initialAlpha: 0.2, finalAlpha: 1, duration: 1.8)
         didAnimate = true
-        
     }
-
-
-    
 }
 

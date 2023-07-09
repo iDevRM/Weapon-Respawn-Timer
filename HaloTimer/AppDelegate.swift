@@ -569,8 +569,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             return weaponSet
         }
-    
-        
     }
     
     
