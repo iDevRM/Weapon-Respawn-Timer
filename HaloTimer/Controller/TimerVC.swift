@@ -11,40 +11,39 @@ import AVFoundation
 
 
 class TimerVC: UIViewController, UINavigationControllerDelegate {
-
-    @IBOutlet weak var backgroundView:       UIView!
-    @IBOutlet weak var startButton:          UIButton!
-    @IBOutlet weak var collectionView:       UICollectionView!
-    @IBOutlet weak var timerBackgroundView:  UIView!
-    @IBOutlet weak var pictureBackroundView: UIView!
-    @IBOutlet weak var pictureVIew:          UIImageView!
-    @IBOutlet weak var timerLabel:           UILabel!
-    @IBOutlet weak var infoButton:           UIBarButtonItem!
-    @IBOutlet weak var backgroundImageView:  UIImageView!
     
-    var audioPlayer:        AVAudioPlayer?
-    var selectedMap:        Map?
-    var weaponArray       = [Weapon]()
-    var timer:              Timer?
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var weaponTitle: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var timerBackgroundView: UIView!
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var infoButton: UIBarButtonItem!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    var audioPlayer: AVAudioPlayer?
+    var selectedMap: Map?
+    var weaponArray = [Weapon]()
+    var timer: Timer?
     var weaponRespawnTime = 0
-    var timeRemaining     = 0
+    var timeRemaining = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.delegate    = self
-        collectionView.delegate           = self
-        collectionView.dataSource         = self
+        navigationController?.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.layer.cornerRadius = 10
         setAllUILayers()
         setCustomFontForTitle()
         loadWeaponsFromSelectedMap()
         setFirstWeapon()
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destVC = segue.destination as? DirtySpawnVC {
-            destVC.mapImageName = selectedMap!.imageName!
+        if let destVC = segue.destination as? DirtySpawnVC,
+           let imageName = selectedMap?.imageName {
+            destVC.mapImageName = imageName
         }
     }
     
@@ -56,7 +55,7 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-//MARK: - IBActions
+    //MARK: - IBActions
     @IBAction func infoButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "dirtySpawnSegue", sender: nil)
     }
@@ -73,11 +72,9 @@ class TimerVC: UIViewController, UINavigationControllerDelegate {
             sender.setTitle("Start", for: .normal)
             timer!.invalidate()
             timer = nil
-            timerLabel.backgroundColor    = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
+            timerLabel.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
         }
-        
     }
-
 }
 
 //MARK: - Collection view data source and delegate methods
@@ -96,18 +93,24 @@ extension TimerVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let image = UIImage(named: weaponArray[indexPath.row].name!),
-           let respawnTime = weaponArray[indexPath.row].respawnTime {
-            pictureVIew.image = image
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.alpha = 0.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                cell.alpha = 1.0
+            }
+            let weapon = weaponArray[indexPath.row]
+            weaponTitle.text = weapon.name
+        }
+        
+        if let respawnTime = weaponArray[indexPath.row].respawnTime {
             timerLabel.text = convertToMinutesAndSeconds(from: respawnTime)
-            weaponRespawnTime = Int(respawnTime)!
+            weaponRespawnTime = Int(respawnTime) ?? Int()
             startButton.setTitle("Start", for: .normal)
             if timer != nil {
                 timer!.invalidate()
                 timer = nil
             }
-            timerLabel.backgroundColor    = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
-            
+            timerLabel.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
         }
     }
     
@@ -131,67 +134,51 @@ extension TimerVC {
 extension TimerVC {
     
     func setFirstWeapon() {
-        
-        if let firstWeapon = weaponArray.first {
-            pictureVIew.image = UIImage(named: firstWeapon.name!)
-            timerLabel.text = convertToMinutesAndSeconds(from: firstWeapon.respawnTime!)
-            weaponRespawnTime = Int(firstWeapon.respawnTime!)!
-            timeRemaining = Int(firstWeapon.respawnTime!)!
+        if let firstWeapon = weaponArray.first,
+           let respawnTime = firstWeapon.respawnTime,
+           let integerRespawnTime = Int(respawnTime) {
+            weaponTitle.text = firstWeapon.name
+            timerLabel.text = convertToMinutesAndSeconds(from: respawnTime)
+            weaponRespawnTime = integerRespawnTime
+            timeRemaining = integerRespawnTime
         }
         
     }
     
     func setAllUILayers() {
-        
-        timerBackgroundView.layer.shadowColor   = UIColor.black.cgColor
-        timerBackgroundView.layer.shadowRadius  = 5
+        timerBackgroundView.layer.shadowColor = UIColor.black.cgColor
+        timerBackgroundView.layer.shadowRadius = 5
         timerBackgroundView.layer.shadowOpacity = 0.5
-        timerBackgroundView.layer.shadowOffset  = CGSize(width: 0, height: 20)
-        timerBackgroundView.backgroundColor     = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.5963264718)
-        timerBackgroundView.layer.cornerRadius  = 10
+        timerBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 20)
+        timerBackgroundView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.5963264718)
+        timerBackgroundView.layer.cornerRadius = 10
         
-        startButton.layer.cornerRadius  = 10
-        startButton.backgroundColor     = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 0.558723763)
-        startButton.layer.borderWidth   = 3
-        startButton.layer.borderColor   = UIColor.white.cgColor
-        startButton.layer.shadowColor   = UIColor.black.cgColor
-        startButton.layer.shadowRadius  = 5
+        startButton.layer.cornerRadius = 10
+        startButton.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.5411764706, blue: 0.4470588235, alpha: 1)
+        startButton.layer.borderWidth = 3
+        startButton.layer.borderColor = UIColor.white.cgColor
+        startButton.layer.shadowColor = UIColor.black.cgColor
+        startButton.layer.shadowRadius = 5
         startButton.layer.shadowOpacity = 1
         
-        timerLabel.backgroundColor     = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
-        timerLabel.layer.shadowColor   = UIColor.black.cgColor
+        timerLabel.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.3098039216, blue: 0.2549019608, alpha: 0.7487356022)
+        timerLabel.layer.shadowColor = UIColor.black.cgColor
         timerLabel.layer.shadowOpacity = 1
-        timerLabel.layer.shadowRadius  = 5
-        timerLabel.layer.shadowOffset  = CGSize(width: 0, height: 20)
-        timerLabel.layer.cornerRadius  = 10
-        timerLabel.layer.borderWidth   = 3
-        timerLabel.layer.borderColor   = UIColor.white.cgColor
-       
-        pictureBackroundView.backgroundColor     = #colorLiteral(red: 0.7490196078, green: 0.7960784314, blue: 0.6588235294, alpha: 0.85)
-        pictureBackroundView.layer.borderWidth   = 3
-        pictureBackroundView.layer.borderColor   = UIColor.white.cgColor
-        pictureBackroundView.layer.cornerRadius  = 6
-        pictureBackroundView.layer.shadowColor   = UIColor.black.cgColor
-        pictureBackroundView.layer.shadowRadius  = 5
-        pictureBackroundView.layer.shadowOpacity = 1
-        pictureBackroundView.layer.shadowOffset  = CGSize(width: 0, height: 5)
-        
-        pictureVIew.layer.shadowOpacity = 1
-        pictureVIew.layer.shadowRadius  = 5
-        pictureVIew.layer.shadowColor   = UIColor.black.cgColor
-        pictureVIew.layer.shadowOffset  = CGSize(width: -2, height: 5)
+        timerLabel.layer.shadowRadius = 5
+        timerLabel.layer.shadowOffset = CGSize(width: 0, height: 20)
+        timerLabel.layer.cornerRadius = 10
+        timerLabel.layer.borderWidth = 3
+        timerLabel.layer.borderColor = UIColor.white.cgColor
         
         backgroundImageView.layer.cornerRadius = 10
-        
     }
     
     func setCustomFontForTitle() {
-        
         if let titleName = selectedMap?.mapName {
             navigationItem.title = titleName
             navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "MyriadPro-Regular", size: 35) as Any]
         }
-
+        
     }
     
     @objc func update() {
@@ -213,7 +200,6 @@ extension TimerVC {
                 }
             }
         }
-    
     }
     
     func convertToMinutesAndSeconds(from number : String) -> String {
@@ -225,5 +211,4 @@ extension TimerVC {
             return "\((convertedNumber % 3600) / 60):\((convertedNumber % 3600) % 60)"
         }
     }
-    
 }
